@@ -35,12 +35,11 @@ class LinearRegressor:
         if np.ndim(X) > 1:
             X = X.reshape(1, -1)
 
-        # TODO: Train linear regression model with only one coefficient
-        n = X.shape[1]
+        n = len(X)
         mean_x = np.mean(X)
         mean_y = np.mean(y)
-        covariance = (1/n)*sum((y-mean_y)*(X-mean_x))
-        variance_x = (1/n)*sum(X-mean_x)
+        covariance = (1/n)*np.sum((y-mean_y)*(X-mean_x))
+        variance_x = (1/n)*np.sum((X-mean_x)**2)
 
         self.coefficients = covariance/variance_x
         self.intercept = mean_y - mean_x*self.coefficients
