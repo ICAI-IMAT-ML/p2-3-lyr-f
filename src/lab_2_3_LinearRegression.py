@@ -36,8 +36,14 @@ class LinearRegressor:
             X = X.reshape(1, -1)
 
         # TODO: Train linear regression model with only one coefficient
-        self.coefficients = None
-        self.intercept = None
+        n = X.shape[1]
+        mean_x = np.mean(X)
+        mean_y = np.mean(y)
+        covariance = (1/n)*sum((y-mean_y)*(X-mean_x))
+        variance_x = (1/n)*sum(X-mean_x)
+
+        self.coefficients = covariance/variance_x
+        self.intercept = mean_y - mean_x*self.coefficients
 
     # This part of the model you will only need for the last part of the notebook
     def fit_multiple(self, X, y):
