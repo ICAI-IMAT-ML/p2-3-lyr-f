@@ -151,30 +151,25 @@ def anscombe_quartet():
     anscombe = sns.load_dataset("anscombe")
 
     # Anscombe's quartet consists of four datasets
-    # TODO: Construct an array that contains, for each entry, the identifier of each dataset
-    datasets = None
+    datasets = anscombe["dataset"].unique()
 
     models = {}
     results = {"R2": [], "RMSE": [], "MAE": []}
     for dataset in datasets:
 
         # Filter the data for the current dataset
-        # TODO
-        data = None
+        data = anscombe[anscombe["dataset"]==dataset]
 
         # Create a linear regression model
-        # TODO
-        model = None
+        model = LinearRegressor()
 
         # Fit the model
-        # TODO
-        X = None  # Predictor, make it 1D for your custom model
-        y = None  # Response
+        X = data["x"]  # Predictor, make it 1D for your custom model
+        y = data["y"]  # Response
         model.fit_simple(X, y)
 
         # Create predictions for dataset
-        # TODO
-        y_pred = None
+        y_pred = model.predict(X)
 
         # Store the model for later use
         models[dataset] = model
@@ -193,7 +188,7 @@ def anscombe_quartet():
         results["R2"].append(evaluation_metrics["R2"])
         results["RMSE"].append(evaluation_metrics["RMSE"])
         results["MAE"].append(evaluation_metrics["MAE"])
-    return results
+    return anscombe, datasets, models, results  # Esto tenia que cambiarlo??????????
 
 
 # Go to the notebook to visualize the results
