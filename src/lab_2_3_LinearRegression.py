@@ -59,9 +59,14 @@ class LinearRegressor:
         Returns:
             None: Modifies the model's coefficients and intercept in-place.
         """
-        # TODO: Train linear regression model with multiple coefficients
-        self.intercept = None
-        self.coefficients = None
+
+        X = np.column_stack((np.ones(X.shape[0]), X))
+        x_transpuesta = X.T
+        W = np.linalg.pinv(x_transpuesta@X)@x_transpuesta@y
+        W = W.T
+
+        self.intercept = W[0]
+        self.coefficients = W[1:]
 
     def predict(self, X):
         """
