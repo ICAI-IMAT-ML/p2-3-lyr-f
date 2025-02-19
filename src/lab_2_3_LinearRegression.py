@@ -113,7 +113,6 @@ def evaluate_regression(y_true, y_pred):
     rmse = np.sqrt(np.sum((y_true-y_pred)**2)/len(y_true))
 
     # Mean Absolute Error
-    # TODO: Calculate MAE
     mae = np.sum(abs(y_true-y_pred))/len(y_true)
 
     return {"R2": r_squared, "RMSE": rmse, "MAE": mae}
